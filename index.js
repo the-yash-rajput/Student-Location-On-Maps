@@ -56,5 +56,5 @@ app.get("/", (req, res) => {
     })
     // console.log("check")
     return res.redirect('index.html');
-}).listen(8000);
+}).listen(3000);
 
