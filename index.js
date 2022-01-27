@@ -1,7 +1,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-
+let allCountry = require('country-state-city').Country;
+let allStates = require('country-state-city').State;
+let allCities =  require('country-state-city').City;
 const app = express()
 
 app.use(bodyParser.json())
@@ -10,8 +12,27 @@ app.use(bodyParser.urlencoded({
     extended:true
 }))
 
-// app
 // console.log(Country.getAllCountries())
+app.get('/countries', (req, res) => {
+    let countries= allCountry.getAllCountries();
+    res.json(countries); 
+});
+let countryCode;
+app.post("/state", (req, res) => {
+    console.log(req.body);
+    countryCode = req.body.value; 
+    let states = allStates.getStatesOfCountry(countryCode);
+    console.log(states);
+    res.json(states);
+});
+app.post("/cities", (req, res) => {
+    console.log(req.body);
+    let stateCode = req.body.value; 
+    let cities = allCities.getCitiesOfState(countryCode, stateCode);
+    console.log(cities);
+    res.json(cities);
+});
+
 
 mongoose.connect('mongodb://localhost:27017/location', {
     useNewUrlParser: true,

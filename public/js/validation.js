@@ -1,13 +1,9 @@
 
 src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-
-// src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCfCZT318efZQvnaXaKg-rGjP1CmeCCh2c&libraries=places"
-
-
 function ValidateEmail() 
 {
   var s = document.getElementById("email").value;
-  console.log(s);
+  // console.log(s);
 
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(s))
   {
@@ -16,43 +12,94 @@ function ValidateEmail()
   alert("You have entered an invalid email address!")
   return (false)
 }
-
-
-console.log("ji");
-
-
+let allData;
 function select() {
-  console.log(1);
-  // $(document).ready(function () {
-  //   var autocomplete = new google.maps.places.Autocomplete((document.getElementById('location')), {
-  //     types: ['geacode']
-      
-  //   });
-  //   google.maps.event.addListener(autocomplete, 'place_changed', function (){
-  //     var near_place = autocomplete.getPlace();
-  //   });
-
-  // });
-  // $(document).ready(function () {
-  //   console.log(2)
-  //   $.ajax({
-  //     type: 'get',
-  //     url: "https://www.universal-tutorial.com/api/getaccesstoken",
-  //     success: function(data) {
-  //       console.log("success")
-  //     },
-  //     error: function(error) {
-  //       console.log("error")
-  //     },
-  //     header:{
-  //       "Accept": "application/json",
-  //       "api-token": "YrZ95232OHRNqBP8wSqwnbNw25y3FW09I0IRm_cwo3yygui8P50IB_4QCzFDQBwqdFQ",
-  //       "user-email": "yashrajputishu@gmail.com"
-  //     }
-  //   })
-  //   console.log(3)
-  // });
-  
+  fetch("/countries").then(res => res.json()).then(data => {
+    // console.log(data);
+    allData = data;
+    let tem = document.getElementById("country");
+    for (let i = 0; i < data.length; i++) {
+      const newOption = document.createElement("option");
+      newOption.text = data[i].name;
+      newOption.value = data[i].name;
+      tem.appendChild(newOption);
+    }
+  });
   console.log(4)
 }
 select();
+
+function findStates(){
+  let country = document.getElementById("country").value;
+  console.log(country);
+  console.log(allData);
+  let countryCode;
+  for (let i = 0; i < allData.length; i++){
+    if (allData[i].name == country) {
+      countryCode = allData[i].isoCode;
+      console.log(countryCode);
+
+      break;
+    }
+  }
+  console.log(countryCode);
+  let data = { "value": countryCode };
+  fetch('/state', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+    .then(data => {
+      let tem = document.getElementById("state");
+      for (let i = 0; i < data.length; i++) {
+        const newOption = document.createElement("option");
+        newOption.text = data[i].name;
+        newOption.value = data[i].name;
+        tem.appendChild(newOption);
+      }
+      allData = data;
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+function findCities(){
+  let state = document.getElementById("state").value;
+  console.log(state);
+  console.log(allData);
+  let stateCode;
+  for (let i = 0; i < allData.length; i++){
+    if (allData[i].name == state) {
+      stateCode = allData[i].isoCode;
+      console.log(stateCode);
+      break;
+    }
+  }
+  let data = { "value": stateCode };
+  fetch('/cities', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+    .then(data => {
+      let tem = document.getElementById("city");
+      for (let i = 0; i < data.length; i++) {
+        const newOption = document.createElement("option");
+        newOption.text = data[i].name;
+        newOption.value = data[i].name;
+        tem.appendChild(newOption);
+      }
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
