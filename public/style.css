@@ -4,7 +4,6 @@
     list-style: none;
     text-decoration:none;
 }
-
 .sidebar{
     position: fixed;
     left: 0;
@@ -19,7 +18,6 @@
     line-height: 70px;
     background: #603146;
 }
-
 .sidebar ul i{
     display: block;
     height: 100%;
@@ -38,10 +36,22 @@ ul li:hover i{
     padding-left: 50px;
 }
 
+.inner-ul{
+    box-sizing: border-box;
+    border: top 1px solid rgba(255,255,255,.1);
+    border-bottom:1px solid black ;
+    font-size: 18px;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .myForm{
-    margin: 0;
+    margin-left: 130px;
     position: absolute;
-    left: 45%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -49%);
     font-family: 'Ubuntu', sans-serif;
 }
 input[type=text],input[type=email],input[type=password], select, textarea {
@@ -69,4 +79,17 @@ input[type=submit]:hover {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-  }
+}
+
+
+#mapdiv {
+    height: 750px;
+    border: 10px solid #603146;
+    margin-left: 250px;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+

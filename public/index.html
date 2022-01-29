@@ -7,22 +7,36 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Ubuntu:wght@400;500&display=swap');></style>
-
-    <script
-        src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     
     <div class="sidebar">
       <header>Select</header>
-      <ul>
-          <li><i class="fas fa-address-card">  Enter Your Data</i></a></li>
-          <li><i class="fas fa-map">  Show On Map</i></a></li>
+      <ul id='myid'>
+          <li><i class="fas fa-address-card" id="hideMap">  Enter Your Data</i></a></li>
+          <li><i class="fas fa-map" id="showMap">  Show On Map</i></a>
+            <br>
+            <header>Find Student by Location</header><br><br>
+            <ul class="inner-ul">
+                <li><p>Country</p>
+                    <select id="countryMap"></select></li>
+
+                <li><p>State</p>
+                    <select id="stateMap"></select></li>
+
+                <li><p>City</p>
+                    <select id="cityMap"></select></li>
+              </ul>
+          </li>
+          <li><i class='fas fa-map-marker-alt' id="searchOnMap">  Search</i></a>
         </ul>
     </div>
 
-    <div class="myForm" >
+    <div class="myForm" id="myForm">
         <form action="/sign_up" method="POST">
             <h1>Please enter the informations</h1><br><br>
             <p>First Name</p>
@@ -39,19 +53,13 @@
 
             <div class="container">
               <p>Country</p>
-                <select name="country" id="country" class="form-control input-lg" onchange="findStates()">
-                    <!-- <option value="">Select country</option> -->
-                </select>
-                <br />
+                <select name="country" id="country" class="form-control input-lg"></select>
+                <br>
                 <p>State</p>
-                <select name="state" id="state" class="form-control input-lg" onchange="findCities()">
-                    <option value="">Select state</option>
-                </select>
-                <br />
+                <select name="state" id="state" class="form-control input-lg " value="none">Select State</select>
+                <br>
                 <p>City</p>
-                <select name="city" id="city" class="form-control input-lg">
-                    <option value="">Select city</option>
-                </select>
+                <select name="city" id="city" class="form-control input-lg" value="none">Select City</select>
             </div>
             <br>
             <p>Email Address</p>
@@ -59,11 +67,18 @@
             <p>Password</p>
             <input type="password" id="pass" name="password" placeholder="Password" required>
             <br>
-            <button onclick="ValidateEmail()" id="submit">submit</button><br><br>
+            <button onclick="ValidateEmail()"  id="submit">submit</button>
         </form>
     </div> 
 
+    <div id="mapdiv">
+        <div id="map"></div>
+    </div>
+
     <script src="js/validation.js"></script> </script>
+    <script src="js/search.js"></script>
+    <script src="js/toggle.js"></script> </script>
+    <script src="js/map.js"></script>
     
 </body>
 
