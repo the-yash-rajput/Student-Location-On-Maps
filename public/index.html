@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Ubuntu:wght@400;500&display=swap');></style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
@@ -12,8 +12,7 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
-<body>
-    
+<body >
     <div class="sidebar">
       <header>Select</header>
       <ul id='myid'>
@@ -23,22 +22,21 @@
             <header>Find Student by Location</header><br><br>
             <ul class="inner-ul">
                 <li><p>Country</p>
-                    <select id="countryMap"></select></li>
+                    <select id="countryMap"><option value="" selected disabled>Select Country</option></select></li>
 
                 <li><p>State</p>
-                    <select id="stateMap"></select></li>
+                    <select id="stateMap"><option value="" selected disabled>Select State</option></select></li>
 
                 <li><p>City</p>
-                    <select id="cityMap"></select></li>
+                    <select id="cityMap"><option value="" selected disabled>Select City</option></select></li>
               </ul>
           </li>
           <li><i class='fas fa-map-marker-alt' id="searchOnMap">  Search</i></a>
         </ul>
     </div>
-
     <div class="myForm" id="myForm">
         <form action="/sign_up" method="POST">
-            <h1>Please enter the informations</h1><br><br>
+            <h1>Please Enter The Informations</h1><br>
             <p>First Name</p>
             <input type="text" id="fname" name="fname" placeholder="First Name" required><br>
             <p>Last Name</p>
@@ -53,15 +51,15 @@
 
             <div class="container">
               <p>Country</p>
-                <select name="country" id="country" class="form-control input-lg"></select>
+                <select name="country" id="country" class="form-control input-lg"><option value="" selected disabled>Select Country</option></select>
                 <br>
                 <p>State</p>
-                <select name="state" id="state" class="form-control input-lg " value="none">Select State</select>
+                <select name="state" id="state" class="form-control input-lg " value="none"><option value="" selected disabled>Select State</option></select>
                 <br>
                 <p>City</p>
-                <select name="city" id="city" class="form-control input-lg" value="none">Select City</select>
+                <select name="city" id="city" class="form-control input-lg" value="none"><option value="" selected disabled>Select City</option></select>
             </div>
-            <br>
+            
             <p>Email Address</p>
             <input type="email" id="email" name="email" placeholder="Email" required><br>
             <p>Password</p>

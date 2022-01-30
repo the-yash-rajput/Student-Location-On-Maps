@@ -19,8 +19,17 @@ $(document).ready(function () {
     })
     .then(response => response.json())
       .then(data => {
-      console.log('Success:', data);
+        const mapdiv = document.getElementById("mapdiv");
+        mapdiv.removeChild(document.getElementById("map"));
+        const innerMapDiv = document.createElement("div");
+        innerMapDiv.setAttribute('id', 'map');
+        mapdiv.appendChild(innerMapDiv);
+        
         let allDataOfLocation = data;
+        if (allDataOfLocation.count == 0) {
+          alert("No Data Fount");
+        }
+        console.log('Success:', data);
         var map = L.map('map').setView([allDataOfLocation.latitude,allDataOfLocation.longitude], 13);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFub2pzaXJ2aSIsImEiOiJja3l2a2JiZ2MwaHJyMm90NG40b2tlbXVzIn0.bG-TiWrcFfw97Gg6jJcVHQ', {
@@ -42,9 +51,5 @@ L.marker([allDataOfLocation.latitude,allDataOfLocation.longitude]).addTo(map)
 
   });
 });
-
-// console.log(allDataOfLocation);
-
-
 
 

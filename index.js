@@ -64,6 +64,17 @@ app.post("/citiesMap", (req, res) => {
     res.json(cities);
 });
 //__________________________________________________________________________________________
+const Schema = mongoose.Schema;
+    const User = mongoose.model('users', Schema({
+        fname: String,
+        lname: String,
+        gender: String,
+        email: String,
+        pass: String,
+        country: String,
+        state: String,
+        city: String
+    }));
 app.post("/MapLocations",async (req, res) => {
     // console.log(req.body);
     let city = req.body.city;
@@ -79,31 +90,22 @@ app.post("/MapLocations",async (req, res) => {
             break;
         }
     }
-    const Schema = mongoose.Schema;
-    const User = mongoose.model('users', Schema({
-        fname: String,
-        lname: String,
-        gender: String,
-        email: String,
-        pass: String,
-        country: String,
-        state: String,
-        city: String
-    }));
-    let finalData="";
+    
+    let finalData = "";
+    let count = 0;
     const studentData = await User.find({});
     for (let i = 0; i < studentData.length; i++){
         if (studentData[i].city == city) {
-            finalData += studentData[i].fname + " "+studentData[i].lname;
-            if (i != studentData.length - 1) {
-                finalData += ",";
-            }
+            finalData += "Name: "+ studentData[i].fname + " " + studentData[i].lname + "<br>" + "Email: " + studentData[i].email+ "<br><br>";
+            count++;
         }
     }
+    finalData = "Total Student: " + count + "<br><br>" + finalData;
     let finalLocationData = {
         "latitude": latitude,
         "longitude": longitude,
-        "finalData": finalData
+        "finalData": finalData,
+        "count":count
     };
     // console.log(finalLocationData);
     res.json(finalLocationData);

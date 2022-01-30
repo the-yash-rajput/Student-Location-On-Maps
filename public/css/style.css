@@ -31,7 +31,9 @@
     border-bottom:1px solid black ;
     transition: .4s;
 }
-
+body{
+    background:#5D5C61;
+}
 ul li:hover i{
     padding-left: 50px;
 }
@@ -83,7 +85,7 @@ input[type=submit]:hover {
 
 
 #mapdiv {
-    height: 750px;
+    height: 780px;
     border: 10px solid #603146;
     margin-left: 250px;
 }
@@ -93,3 +95,13 @@ input[type=submit]:hover {
     height: 100%;
 }
 
+#submit{
+    background:#0066A2;
+     color:white;
+     border-style:outset;
+     border-color:#0066A2;
+     height:50px;
+     width:100px;
+     font:bold15px arial,sans-serif;
+     text-shadow:none;
+}

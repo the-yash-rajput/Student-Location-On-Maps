@@ -1,13 +1,15 @@
 src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 function ValidateEmail() 
 {
-  var s = document.getElementById("email").value;
+  let s = document.getElementById("email").value;
   // console.log(s);
 
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(s))
   {
     return (true)
   }
+  let inputState = document.getElementById("state").value;
+  console.log(inputState);
   alert("You have entered an invalid email address!")
   return (false)
 }
@@ -17,12 +19,8 @@ let allDataState;
 function select() {
   fetch("/countries").then(res => res.json()).then(data => {
     // console.log(data);
-	allData = data;
+	  allData = data;
     let tem = document.getElementById("country");
-    const newOption = document.createElement("option");
-    newOption.text = "Select Country";
-    newOption.value = "none";
-    tem.appendChild(newOption);
 		for (let i = 0; i < data.length; i++) {	
       const newOption = document.createElement("option");
       newOption.text = data[i].name;
@@ -64,10 +62,6 @@ function findStates() {
 				}
 				else break;
       }
-      const newOption = document.createElement("option");
-      newOption.text = "Select State";
-      newOption.value = "none";
-      tem.appendChild(newOption);
       for (let i = 0; i < data.length; i++) {
         const newOption = document.createElement("option");
         newOption.text = data[i].name;
@@ -111,17 +105,13 @@ function findCities(){
 				}
 				else break;
       }
-      const newOption = document.createElement("option");
-      newOption.text = "Select City";
-      newOption.value = "none";
-      tem.appendChild(newOption);
       for (let i = 0; i < data.length; i++) {
         const newOption = document.createElement("option");
         newOption.text = data[i].name;
         newOption.value = data[i].name;
         tem.appendChild(newOption);
       }
-    // console.log('Success:', data);
+    console.log('Success:', data);
   })
   .catch((error) => {
     console.error('Error:', error);
